@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Jobs - OneDayJob{% endblock %}
+
+{% block content %}
+<h2>Available Jobs</h2>
+<p><a href="{% url 'post_job' %}">Post a new Job</a></p>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Estimated Time</th>
+            <th>Reward</th>
+            <th>Posted By</th>
+            <th>Accepted By</th>
+            <th>Status</th>
+            <th>Posted At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in jobs %}
+        <tr>
+            <td>{{ job.title }}</td>
+            <td>{{ job.get_category_display }}</td>
+            <td>{{ job.estimated_time }}</td>
+            <td>{{ job.reward }}</td>
+            <td>{{ job.posted_by.username }}</td>
+            <td>{% if job.accepted_by %}{{ job.accepted_by.username }}{% else %} - {% endif %}</td>
+            <td>{% if job.completed %}Completed{% else %}Open{% endif %}</td>
+            <td>{{ job.created_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8">No jobs available.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

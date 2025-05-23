@@ -1,16 +1,9 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from .forms import UserRegistrationForm
-from .forms import JobForm
+from .forms import UserRegistrationForm, JobForm
 from .models import Job
 
-
-# Create your views here.
 def index(request):
     return render(request, 'index.html')
 
@@ -25,8 +18,7 @@ def register(request):
             return redirect('job_list')
     else:
         form = UserRegistrationForm()
-    
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'registrations/register.html', {'form': form})
 
 @login_required
 def job_list(request):

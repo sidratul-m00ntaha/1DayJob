@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Post Job - OneDayJob{% endblock %}
+
+{% block content %}
+<h2>Post a New Job</h2>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Post Job</button>
+</form>
+{% endblock %}
